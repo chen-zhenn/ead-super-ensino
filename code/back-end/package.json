@@ -1,0 +1,12 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "server": "json-server src/db.json -p 8000 --watch"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.3"
+  }
+}

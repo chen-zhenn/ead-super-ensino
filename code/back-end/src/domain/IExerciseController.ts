@@ -1,5 +1,5 @@
 import { IExercise } from "./IExercise";
 
 export interface IExerciseController {
-    list: () => IExercise[]
+    list: () =>  Promise<IExercise[]>
 } 

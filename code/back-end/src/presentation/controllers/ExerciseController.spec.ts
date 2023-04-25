@@ -1,17 +1,25 @@
 import ExerciseController from "./ExerciseController";
 import { IExercise, IStatement } from "../../domain/IExercise";
 import { IExerciseController } from "../../domain/IExerciseController";
+import { IExerciseRepository } from "../../domain/IExerciseRepository";
+
+class MockExerciseRepository implements IExerciseRepository {
+    findAll(): Promise<IExercise[]> {
+        return Promise.resolve([]);
+    }
+}
 
 describe("ExerciseController", () => {
     let exercise: IExerciseController;
-    let exerciseList:IExercise[];
+    let exerciseList: IExercise[];
     let mockList: IExercise;
-    let listSpy: jest.SpyInstance<IExercise[], []>;
+    let listSpy: jest.SpyInstance<Promise<IExercise[]>>;
 
-    beforeEach(() => {
-        exercise = new ExerciseController();
+    beforeEach(async () => {
+        const mockRepository = new MockExerciseRepository();
+        exercise = new ExerciseController(mockRepository);
         listSpy = jest.spyOn(exercise, "list");
-        exerciseList = exercise.list();
+        exerciseList = await exercise.list();
         mockList = {
             disciplina: "Português",
             materia: "Gramática",
@@ -45,38 +53,37 @@ describe("ExerciseController", () => {
     });
 
     it("Dever chamar o método list uma vez", () => {
-        expect(listSpy).toBeCalledTimes(1)
-    })
-
-    it("Dever retornar uma lista do tipo execício vazia", () => {
-        const expectedList: IExercise[] = [];
-        expect(exerciseList).toEqual(expectedList)
-        expect(listSpy).toBeCalled()
+        expect(listSpy).toBeCalledTimes(1);
     });
 
-    it("Dever retornar uma lista com objeto do tipo execício", () => {
-        const expectedList: IExercise[] = [mockList];
-        listSpy.mockReturnValueOnce(expectedList);
-        exerciseList = exercise.list();
+    it("Dever retornar uma lista do tipo execício vazia", async () => {
+        const expectedList: IExercise[] = [];
         expect(exerciseList).toEqual(expectedList);
-      });
+        expect(listSpy).toBeCalled();
+    });
 
-      it("Dever retornar um ojeto enunciado correta", () => {
+    it("Dever retornar uma lista com objeto do tipo execício", async () => {
         const expectedList: IExercise[] = [mockList];
-        const expectEnunciado = expectedList[0].questao.enunciado 
-        listSpy.mockReturnValueOnce(expectedList);
-        exerciseList = exercise.list();
-        const { enunciado } = exerciseList[0].questao
-        expect(enunciado).toEqual(expectEnunciado)
-      })
+        listSpy.mockReturnValueOnce(Promise.resolve(expectedList));
+        exerciseList = await exercise.list();
+        expect(exerciseList).toEqual(expectedList);
+    });
 
-      it("Dever retornar uma lista de alternativas correta", () => {
+    it("Dever retornar um ojeto enunciado correta", async () => {
         const expectedList: IExercise[] = [mockList];
-        const expectAlternativasList = expectedList[0].questao.alternativas 
-        listSpy.mockReturnValueOnce(expectedList);
-        exerciseList = exercise.list();
-        const alternativaList = exerciseList[0].questao.alternativas
-        expect(alternativaList).toEqual(expectAlternativasList)
-      })
-      
+        const expectEnunciado = expectedList[0].questao.enunciado;
+        listSpy.mockReturnValueOnce(Promise.resolve(expectedList));
+        exerciseList = await exercise.list();
+        const { enunciado } = exerciseList[0].questao;
+        expect(enunciado).toEqual(expectEnunciado);
+    });
+
+    it("Dever retornar uma lista de alternativas correta", async () => {
+        const expectedList: IExercise[] = [mockList];
+        const expectAlternativasList = expectedList[0].questao.alternativas;
+        listSpy.mockReturnValueOnce(Promise.resolve(expectedList));
+        exerciseList = await exercise.list();
+        const alternativaList = exerciseList[0].questao.alternativas;
+        expect(alternativaList).toEqual(expectAlternativasList);
+    });
 });

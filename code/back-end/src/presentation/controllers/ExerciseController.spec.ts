@@ -1,23 +1,22 @@
+import { MongoDatabase } from "../../infra/database/mongodb/MongoDatabase";
 import ExerciseController from "./ExerciseController";
 import { IExercise, IStatement } from "../../domain/IExercise";
 import { IExerciseController } from "../../domain/IExerciseController";
 import { IExerciseRepository } from "../../domain/IExerciseRepository";
 
-class MockExerciseRepository implements IExerciseRepository {
-    findAll(): Promise<IExercise[]> {
-        return Promise.resolve([]);
-    }
-}
+/**
+ * Refatorar devido mudanças no
+ * banco de dados...
+ */
 
 describe("ExerciseController", () => {
+    let dbMongo = MongoDatabase.getInstance();
     let exercise: IExerciseController;
     let exerciseList: IExercise[];
     let mockList: IExercise;
     let listSpy: jest.SpyInstance<Promise<IExercise[]>>;
 
     beforeEach(async () => {
-        const mockRepository = new MockExerciseRepository();
-        exercise = new ExerciseController(mockRepository);
         listSpy = jest.spyOn(exercise, "list");
         exerciseList = await exercise.list();
         mockList = {

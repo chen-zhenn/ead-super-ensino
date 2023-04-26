@@ -1,4 +1,4 @@
-import { IHttpGetClient } from "data/protocols/http/IHttpCliente";
+import { IHttpGetClient } from "@/data/protocols/http/IHttpCliente";
 
 export class RemoteExercise {
   constructor(

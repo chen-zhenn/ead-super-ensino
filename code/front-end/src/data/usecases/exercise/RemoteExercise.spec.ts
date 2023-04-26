@@ -1,5 +1,5 @@
-import { IHttpGetClient } from "data/protocols/http/IHttpCliente";
-import { RemoteExercise } from "./RemoteExercise";
+import { IHttpGetClient } from "@/data/protocols/http/IHttpCliente";
+import { RemoteExercise } from "@/data/usecases/exercise/RemoteExercise";
 
 describe("RemoteExercise", () => {
   it("Deve ser chamado com URL correta", async () => {

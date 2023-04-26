@@ -1,5 +1,4 @@
-import { IHttpGetClient } from "@/data/protocols/http/IHttpCliente";
-import { IHttpResponse } from "@/data/protocols/http/IHttpResponse";
+import { IHttpGetClient, IHttpResponse } from "@/data/protocols/http";
 import { InternalServerError } from "@/domain/errors/internal-server-error";
 
 export class RemoteExercise {

@@ -1,5 +1,4 @@
-import { IHttpGetClient } from "@/data/protocols/http/IHttpCliente";
-import { IHttpResponse } from "@/data/protocols/http/IHttpResponse";
+import { IHttpGetClient, IHttpResponse } from "@/data/protocols/http";
 import { RemoteExercise } from "@/data/usecases/exercise/RemoteExercise";
 
 describe("RemoteExercise", () => {

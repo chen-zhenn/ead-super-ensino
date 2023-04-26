@@ -15,6 +15,7 @@
     "server": "json-server src/db.json -p 8000 --watch"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^4.1.7",
     "@types/jest": "^29.5.1",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.13",
@@ -46,9 +47,10 @@
   "dependencies": {
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.17",
+    "@types/mongodb": "^4.0.7",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "fast-glob": "^3.2.12",
-    "mongoose": "^7.0.4"
+    "mongodb": "^5.3.0"
   }
 }

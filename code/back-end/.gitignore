@@ -1,1 +1,26 @@
+# Directories
 node_modules/
+dist/
+coverage/
+
+# MongoDB data directory
+/data/db/
+
+# Files
+.env
+.env.test
+
+# Typescript
+*.tsbuildinfo
+
+# Jest
+jest.config.js
+
+# Eslint
+.eslintcache
+
+# VSCode
+.vscode/
+
+# MacOS
+.DS_Store

@@ -1,4 +1,6 @@
 import { IHttpGetClient } from "@/data/protocols/http/IHttpCliente";
+import { IHttpResponse } from "@/data/protocols/http/IHttpResponse";
+import { InternalServerError } from "@/domain/errors/internal-server-error";
 
 export class RemoteExercise {
   constructor(
@@ -6,7 +8,9 @@ export class RemoteExercise {
     private httpClient: IHttpGetClient
   ) {}
 
-  async list(): Promise<void> {
-    return Promise.resolve();
+  async list(): Promise<IHttpResponse> {
+    const response = await this.httpClient.get(this.url);
+    if(response.statusCode === 500) throw new InternalServerError() 
+    return response 
   }
 }

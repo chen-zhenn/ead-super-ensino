@@ -10,9 +10,9 @@ Aplicação Web...
 
 __Dependências__:
 
-* Node V18.12.1
-* Yarn
-* Mongo DB
+* Node v18.12.1
+* Yarn v1.22.19
+* Mongo DB v6.0.5
 
 Como instalar **Node.js**:   
 
@@ -40,6 +40,8 @@ __2. Importe a base de dados NoSQL__
 ```
 mongoimport --db super-ensino --collection exercicios --file ./src/db.json
 ```
+> **Nota**: 
+Certifique-se de que o serviço do **Mongo DB(mongd)** esteja em execução antes de importar a base de dados.
 
 __3. Instale as dependências__
 
@@ -53,10 +55,10 @@ yarn dev
 ```
 __4. Acesse API__
 
-__Base URL__: [http://localhost:8000/api](http://localhost:8000)   
+__Base URL__: [http://localhost:8000/api](http://localhost:8000/api)   
 
 __Endpoints__:
-* :arrow_right: GET /exercicios
+* :arrow_right: GET [/exercicios](http://localhost:8000/api/exercicios)
 
 ### Front-end
 

@@ -25,7 +25,7 @@ __1.__ Via **NVM** - Node Version Manager, consulte o [repositório](https://git
 __2.__ Via instalador (executável), consulte a [documentação](https://nodejs.org/en/download)
 
 Como instalar **Yarn**: Consulte a [documentação](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)   
-Como instalar **Mongo DB**: Consulte a [documentação](https://www.mongodb.com/docs/manual/installation/)
+Como instalar **Mongo DB**: Consulte a [documentação](https://www.mongodb.com/docs/manual/installation/)   
 Como instalar **Docker**: consulte a [documentação](https://docs.docker.com/get-docker)
 
 ### Via Docker

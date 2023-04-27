@@ -19,7 +19,7 @@ Como instalar **Node.js**:
 __1.__ Via **NVM** - Node Version Manager, consulte o [repositório](https://github.com/nvm-sh/nvm)   
 __2.__ Via instalador (executável), consulte a [documentação](https://nodejs.org/en/download)
 
-Como instalar **Yarn**: Consulte a [documentação](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)
+Como instalar **Yarn**: Consulte a [documentação](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)   
 Como instalar **Mongo DB**: Consulte a [documentação](https://www.mongodb.com/docs/manual/installation/)
 
 ### Back-end
@@ -57,3 +57,24 @@ __Base URL__: [http://localhost:8000/api](http://localhost:8000)
 
 __Endpoints__:
 * :arrow_right: GET /exercicios
+
+### Front-end
+
+> **Nota**: 
+Certifique-se de estar na raiz do diretório **:open_file_folder: front-end/**
+
+__1. Instale as dependências__
+
+```
+yarn install
+```
+
+__2. Levante aplicação__
+
+```
+yarn dev
+```
+
+__3. Acesse seu browser(navegador) em__: [http://localhost:3000](http://localhost:3000).
+
+### :boom: Boom!

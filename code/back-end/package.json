@@ -11,7 +11,7 @@
     "ts:watch": "yarn ts --watch",
     "js": "NODE_ENV=production esbuild src/main/server.ts --bundle --minify --platform=node --target=node14 --outdir=dist",
     "js:watch": "yarn js --watch",
-    "dev": "concurrently \"yarn js:watch\" \"nodemon dist/server.js\"",
+    "dev": "yarn js && concurrently \"yarn js:watch\" \"nodemon dist/server.js\"",
     "server": "json-server src/db.json -p 8000 --watch"
   },
   "devDependencies": {

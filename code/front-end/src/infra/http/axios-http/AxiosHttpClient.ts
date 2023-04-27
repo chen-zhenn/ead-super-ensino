@@ -3,6 +3,11 @@ import axios from "axios";
 
 export class AxiosHttpClient {
   static async get(url: string): Promise<IHttpResponse> {
-    return await axios.get(url);
+    const data = await axios.get(url);
+    const response: IHttpResponse = {
+        statusCode: data.status,
+        body: data?.data
+    }
+    return response
   }
 }

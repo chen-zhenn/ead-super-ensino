@@ -17,6 +17,7 @@ __Dependências__:
 * Node v18.12.1
 * Yarn v1.22.19
 * Mongo DB v6.0.5
+* Docker v23.0.4 - Opcional
 
 Como instalar **Node.js**:   
 
@@ -25,8 +26,37 @@ __2.__ Via instalador (executável), consulte a [documentação](https://nodejs.
 
 Como instalar **Yarn**: Consulte a [documentação](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)   
 Como instalar **Mongo DB**: Consulte a [documentação](https://www.mongodb.com/docs/manual/installation/)
+Como instalar **Docker**: consulte a [documentação](https://docs.docker.com/get-docker)
 
-### Back-end
+### Via Docker
+
+> **Nota**: 
+Certifique-se de estar na raiz do diretório codebase **:open_file_folder: code/**
+
+#### Back-end:
+
+:construction: ...
+
+#### Front-end:
+
+__1. Crie a imagem__
+
+```
+docker build -t frontend-super-ensino:v1.0 .
+```
+__2. Crie o container__
+
+```
+docker run --name frontend-super-ensino --network host --volume $(pwd)/front-end:/front-end frontend-super-ensino:v1.0
+```
+
+__3. Acesse seu browser(navegador) em__: [http://localhost:3000](http://localhost:3000).
+### :boom: Boom!
+
+> __Nota__: Gerencie o container com comandos como: `docker start e docker stop`
+
+### Manual
+#### Back-end
 
 > **Nota**: 
 Certifique-se de estar na raiz do diretório **:open_file_folder: back-end/**
@@ -64,7 +94,7 @@ __Base URL__: [http://localhost:8000/api](http://localhost:8000/api)
 __Endpoints__:
 * :arrow_right: GET [/exercicios](http://localhost:8000/api/exercicios)
 
-### Front-end
+#### Front-end
 
 > **Nota**: 
 Certifique-se de estar na raiz do diretório **:open_file_folder: front-end/**

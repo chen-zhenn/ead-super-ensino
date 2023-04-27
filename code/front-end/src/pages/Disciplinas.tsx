@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Card } from "antd";
 import { useContext, useEffect, useState } from "react";
 import Context from "@/presentation/contexts/exercicios";
 
@@ -13,12 +14,20 @@ export default function Disciplinas() {
 
   return (
     <>
-      <h2>Pagina de Disciplinas</h2>
-      <ul>
+      <h1 style={{
+        alignSelf: 'flex-start',
+        marginLeft:'unset', 
+        paddingLeft:'unset'}}>Disciplinas</h1>
+      <ul style={{
+        display:'flex', 
+        flexWrap:'wrap',
+        listStyleType:'none'}}>
         {Array.from(disciplina).map((item,index) => (
-          <li key={index}>
+          <li key={index} style={{marginRight:'1.5rem'}}>
             <Link href={`/exercicios/${item}`} passHref>
-              {item}
+            <Card title="Exercícios" bordered={true}>
+                <h3>{item}</h3>
+            </Card>
             </Link>
           </li>
         ))}

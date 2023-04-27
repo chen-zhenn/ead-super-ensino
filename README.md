@@ -8,6 +8,10 @@ Aplicação Web...
 
 ## :electric_plug: Instalação
 
+<div align="center">
+    <img src="resources/preview-installv1.0.gif">
+</div>
+
 __Dependências__:
 
 * Node v18.12.1

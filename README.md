@@ -46,12 +46,12 @@ __3. Instale as dependências__
 ```
 yarn install
 ```
-__2. Rode aplicação__
+__3. Rode aplicação__
 
 ```
 yarn dev
 ```
-__3. Acesse API__
+__4. Acesse API__
 
 __Base URL__: [http://localhost:8000/api](http://localhost:8000)   
 

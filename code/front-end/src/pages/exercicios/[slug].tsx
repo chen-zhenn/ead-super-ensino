@@ -4,11 +4,11 @@ import { useContext, useEffect, useState } from "react";
 import { Breadcrumb, message, Steps, theme, Button, Checkbox } from "antd";
 import { HomeOutlined } from '@ant-design/icons';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import Context from "@/presentation/contexts/exercicios";
+import { ExeciseContext } from "@/presentation/contexts/exercicios";
 import { IExercise } from "@/domain/models/IExercise";
 
 export default function () {
-  const { exercicios } = useContext(Context);
+  const { exercicios } = useContext(ExeciseContext );
   const [data, seData] = useState<IExercise[]>([]);
   const [content, seContent] = useState<boolean>(false);
   const [current, setCurrent] = useState(0);

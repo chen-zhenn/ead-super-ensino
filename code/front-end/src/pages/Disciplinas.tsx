@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Card } from "antd";
 import { useContext, useEffect, useState } from "react";
-import Context from "@/presentation/contexts/exercicios";
+import { ExeciseContext } from "@/presentation/contexts/exercicios";
 
 export default function Disciplinas() {
-  const { exercicios } = useContext(Context);
+  const { exercicios } = useContext(ExeciseContext);
   const [disciplina, setDisciplina] = useState<Set<string>>(new Set());
 
   useEffect(() => {

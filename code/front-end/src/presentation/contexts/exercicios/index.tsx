@@ -18,6 +18,7 @@ const data: IData = {
 };
 
 export const ExeciseContext = createContext<IData>(data);
+ExeciseContext.displayName = 'ExeciseContext'
 
 export const ExerciseProvider = ({ children }: Props) => {
   const [exerciseData, setExerciseData] = useState<IData>(data);
@@ -27,9 +28,6 @@ export const ExerciseProvider = ({ children }: Props) => {
       .getData()
       .then((response) => {
         const [bodyData] = response.body;
-        const { _id, exercicios } = bodyData
-        data._id = _id
-        data.exercicios = exercicios
         setExerciseData(bodyData);
       });
   }, []);

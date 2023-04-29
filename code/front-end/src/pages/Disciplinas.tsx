@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Card } from "antd";
-import { useContext, useEffect, useState } from "react";
+import { memo, useContext, useEffect, useState } from "react";
 import { ExeciseContext } from "@/presentation/contexts/exercicios";
 
-export default function Disciplinas() {
+function Disciplinas() {
   const { exercicios } = useContext(ExeciseContext);
   const [disciplina, setDisciplina] = useState<Set<string>>(new Set());
 
@@ -35,3 +35,5 @@ export default function Disciplinas() {
     </>
   );
 }
+
+export default memo(Disciplinas)

@@ -1,14 +1,19 @@
-import "@/styles/global.css";
 import type { AppProps } from "next/app";
+import { memo } from "react";
+import GlobalStyle from "@/styles/GlobalStyle";
 import { ExerciseProvider } from "@/presentation/contexts/exercicios";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+
+function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
       <ExerciseProvider>
-        <Component {...pageProps} />
+        <GlobalStyle />
+          <Component {...pageProps} />
       </ExerciseProvider>
     </>
   );
 }
+
+export default memo(MyApp)

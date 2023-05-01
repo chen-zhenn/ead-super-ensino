@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { ExeciseContext } from "@/presentation/contexts/exercicios";
 import { IExercise } from "@/domain/models/IExercise";
 import NavBreadcrumb from "@/presentation/components/breadcrumb";
-import Steper from "@/presentation/components/steper";
+import Stepper from "@/presentation/components/stepper";
 
 interface INavItems {
   title: React.ReactNode | string
@@ -38,7 +38,7 @@ export default function () {
     <>
       <h2>Exercício - {slug}</h2>
       <NavBreadcrumb items={nav} />
-      <Steper data={data} />
+      <Stepper data={data} />
     </>
   );
 }

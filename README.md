@@ -1,10 +1,14 @@
-# :rocket: EAD - Super Ensino
-
-Aplicação Web...
+# :rocket: EAD - Plataforma Digital
 
 <div align="center">
     <img src="resources/preview-v1.0.gif">
 </div>
+
+## Sobre
+
+Aplicação Web: Plataforma digital de reforço escolar...
+
+:globe_with_meridians: __Acessar demo__: :point_right: [Aqui](https://main--fe-super-ensino.netlify.app/)
 
 ## :electric_plug: Instalação
 

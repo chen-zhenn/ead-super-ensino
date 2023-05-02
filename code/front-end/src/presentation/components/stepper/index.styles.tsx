@@ -19,7 +19,7 @@ export const RadioBox = styled.span`
     margin-right: 1rem;
     padding-left: 2rem;
     cursor: pointer;
-
+    
     &:before,
     &:after {
         content: "";
@@ -44,6 +44,10 @@ export const RadioBox = styled.span`
             return `${result}px, ${result}px, 0`
         }});
         background-color: ${(props:IStepper) => props.filled && "rgba(0, 0, 255, 1)"};
+    }
+
+    &.choosed-${(props:IStepper) => props.choosedId}:after{
+        background-color: rgba(0, 0, 255, 1);
     }
 `
 
@@ -112,6 +116,7 @@ interface IStepper {
     right?: boolean;
     wrong?: boolean;
     size?: number;
+    choosedId?: number;
 }
 
 interface ICalcUtils {

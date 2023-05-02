@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from "react"
+import { memo, useEffect, useState } from "react"
 import { IExercise } from "@/domain/models/IExercise";
 import { message } from "antd";
 import { 
@@ -21,29 +21,25 @@ function Steper({data}:Props){
     const [current, setCurrent] = useState(0);
     const [selected,setSelected] = useState(0);
     const [answered,setAnswered] = useState(false)
-    const alternativeRef = useRef<HTMLUListElement>(null);
+    const [choosed,setChoosed] = useState(new Map());
 
     const handlerAnternative = (id:number) => {
-        console.log(`Alternativa selecionada ${id}`)
         setSelected(id);
+        choosed.set(current, id)
     };
 
     const handlerAnswer =() => {
-        console.log("Verificar Resposta")
         setAnswered(true)
+        choosed.set(current, selected)
+        setChoosed(new Map(choosed))
     }
 
     const next = () => {
-        console.log("Avançar Exercício")
-        const $elems = alternativeRef.current?.querySelectorAll("li")
-        
         setAnswered(false)
         setCurrent(current + 1);
     };
     
     const prev = () => {
-        console.log("Voltar Exercício")
-
         setAnswered(false)
         setCurrent(current - 1);
     };
@@ -82,16 +78,20 @@ function Steper({data}:Props){
                             
                             {/* Bloco Alternativas */}
                             <StepSection>
-                                <StepList ref={alternativeRef} id="teste">
+                                <StepList>
                                     {item.questao.alternativas.map((value, index) => {
                                         return (
-                                            <StepListItem 
+                                            <StepListItem  
                                                 key={value.id}
                                                 clickable={true}
                                                 className={ (answered && value.id === item.questao.resposta) ? 
                                                     "right" : (answered && value.id !== item.questao.resposta) ? "wrong " : "" }
                                                 onClick={() => handlerAnternative(value.id)}>
-                                                <RadioBox filled={ value.id  === selected } size={14}>{value.letra}.</RadioBox>
+                                                <RadioBox 
+                                                    className={`choosed-${choosed.get(current) && value.id  === choosed.get(current) && value.id}`}
+                                                    choosedId={ choosed.get(current) && value.id  === choosed.get(current) && value.id}
+                                                    // filled={  value.id  === selected } 
+                                                    size={14}>{value.letra}.</RadioBox>
                                                 <span>{value.texto}</span>
                                             </StepListItem>
                                         )

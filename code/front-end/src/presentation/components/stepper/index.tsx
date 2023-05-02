@@ -1,95 +1,103 @@
 import { memo, useEffect, useState } from "react"
-import { message, Steps, theme, Button, Checkbox, StepProps } from "antd";
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { StepContainer, StepSection } from "./index.styles";
 import { IExercise } from "@/domain/models/IExercise";
+import { message } from "antd";
+import { 
+    StepContainer, 
+    StepContent,
+    StepSection,
+    StepHeadingGroup,
+    StepList,
+    StepListItem, 
+    StepControls,
+    StepControlsContainer, 
+    StepControlsItem,
+    RadioBox } from "./index.styles";
 
 interface Props {
     data: IExercise[];
 }
 
 function Steper({data}:Props){
-    const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
-    const [loading,setLoading] = useState(true)
+    const [selected,setSelected] = useState(0)
 
-    const onChange = (e: CheckboxChangeEvent) => {
-        console.log(`checked = ${e.target.checked}`);
-        console.log(`value = ${e.target.value}`)
+    const handlerAnternative = (id:number) => {
+        console.log(`Alternativa selecionada ${id}`)
+        setSelected(id);
     };
 
+    const handlerAnswer =() => {
+        console.log("Verificar Resposta")
+    }
+
     const next = () => {
+        console.log("Avançar Exercício")
         setCurrent(current + 1);
     };
     
     const prev = () => {
+        console.log("Voltar Exercício")
         setCurrent(current - 1);
     };
 
     useEffect(() => {
-        if(data && data.length) setLoading(false)
     },[data,current])
 
-    
-    const contentStyle: React.CSSProperties = {
-        lineHeight: "initial",
-        textAlign: "left",
-        color: token.colorTextTertiary,
-        backgroundColor: token.colorFillAlter,
-        borderRadius: token.borderRadiusLG,
-        border: `1px dashed ${token.colorBorder}`,
-        marginTop: 16,
-        paddingLeft: '1rem'
-    };
-    
+        
     return(
         <>
-            <h2>Steper...</h2>
             <StepContainer>
-                { data.map((item) => {
+
+                { data.map((item, index) => {
                     return (
-                        <>  
-                            {/* Bloco Steper by tema */}
-                            <StepSection key={item.tema}>
+                          
+                        <StepContent key={item.tema} visible={ current === index  }>
+                            <StepHeadingGroup>
                                 <h2>{item.tema}</h2>
                                 <h3>{item.subtema}</h3>
-                                {/* Bloco Enunciado */}
-                                <section>
-                                    <hgroup>
-                                        <h4>{item.questao.enunciado.objetivo}</h4>
-                                        <h5>{item.questao.enunciado.titulo}</h5>
-                                    </hgroup>
-                                    <div>
-                                        <ul>
-                                            {item.questao.enunciado.opcoes.map((item, index) => {
-                                                return (
-                                                    <li key={index}>{item.texto}</li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                </section>
-                                {/* Bloco Alternativas */}
-                                <section>
-                                    <div>
-                                        <ul>
-                                            {item.questao.alternativas.map((item, index) => {
-                                                return (
-                                                    <li key={index}>
-                                                        <Checkbox value={`${item.id}`} onChange={onChange}>
-                                                            <span>{item.letra} </span>
-                                                        </Checkbox>
-                                                        <span>{item.texto}</span>
-                                                    </li>
-                                                )
-                                            })}
-                                        </ul>
-                                    </div>
-                                </section>
+                            </StepHeadingGroup>
+
+                            {/* Bloco Enunciado */}
+                            <StepSection>
+                                <StepHeadingGroup>
+                                    <h4>{item.questao.enunciado.objetivo}</h4>
+                                    <h5>{item.questao.enunciado.titulo}</h5>
+                                </StepHeadingGroup>
+                                <StepList>
+                                    {item.questao.enunciado.opcoes.map((item, index) => {
+                                        return (
+                                            <StepListItem key={index} clickable={false}>{item.texto}</StepListItem>
+                                        )
+                                    })}
+                                </StepList>
                             </StepSection>
-                        </>
+                            
+                            {/* Bloco Alternativas */}
+                            <StepSection>
+                                <StepList>
+                                    {item.questao.alternativas.map((item, index) => {
+                                        return (
+                                            <StepListItem key={index} clickable={true} onClick={() => handlerAnternative(item.id)}>
+                                                <RadioBox filled={ item.id  === selected } size={14}>{item.letra}.</RadioBox>
+                                                <span>{item.texto}</span>
+                                            </StepListItem>
+                                        )
+                                    })}
+                                </StepList>
+                            </StepSection>
+
+                        </StepContent>
                     )
                 }) }
+
+                <StepControls>
+                    <StepControlsItem onClick={() => handlerAnswer()}>Verificar Resposta</StepControlsItem>
+                    <StepControlsContainer>
+                        { current > 0 && <StepControlsItem onClick={() => prev()}>Anterior</StepControlsItem>}
+                        { current < (data.length -1) && <StepControlsItem onClick={() => next()}>Próximo</StepControlsItem>}
+                    </StepControlsContainer>
+
+                </StepControls>
             </StepContainer>
         </>    
     ) 

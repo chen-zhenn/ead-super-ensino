@@ -20,8 +20,11 @@ function Disciplinas({ exercises }: Props) {
 
   useEffect(() => {
     setData(exercises);
+  },[exercises])
+
+  useEffect(() => {
     setDataDisciplinaData(data.exercicios);
-  }, []);
+  },[data])
 
   useEffect(() => {
     setDataDisciplinaData(exercicios);

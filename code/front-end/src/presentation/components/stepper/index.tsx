@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react"
 import { message, Steps, theme, Button, Checkbox, StepProps } from "antd";
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import { StepContainer, StepSection } from "./index.styles";
 import { IExercise } from "@/domain/models/IExercise";
 
 interface Props {
@@ -44,12 +45,12 @@ function Steper({data}:Props){
     return(
         <>
             <h2>Steper...</h2>
-            <aside>
-                { data.map(item => {
+            <StepContainer>
+                { data.map((item) => {
                     return (
                         <>  
                             {/* Bloco Steper by tema */}
-                            <section key={item.tema} style={{ borderBottom:'solid 1px rgba(128,128,128,1)'}}>
+                            <StepSection key={item.tema}>
                                 <h2>{item.tema}</h2>
                                 <h3>{item.subtema}</h3>
                                 {/* Bloco Enunciado */}
@@ -60,9 +61,9 @@ function Steper({data}:Props){
                                     </hgroup>
                                     <div>
                                         <ul>
-                                            {item.questao.enunciado.opcoes.map(item => {
+                                            {item.questao.enunciado.opcoes.map((item, index) => {
                                                 return (
-                                                    <li>{item.texto}</li>
+                                                    <li key={index}>{item.texto}</li>
                                                 )
                                             })}
                                         </ul>
@@ -72,10 +73,10 @@ function Steper({data}:Props){
                                 <section>
                                     <div>
                                         <ul>
-                                            {item.questao.alternativas.map(item => {
+                                            {item.questao.alternativas.map((item, index) => {
                                                 return (
-                                                    <li>
-                                                        <Checkbox value={item.id} onChange={onChange}>
+                                                    <li key={index}>
+                                                        <Checkbox value={`${item.id}`} onChange={onChange}>
                                                             <span>{item.letra} </span>
                                                         </Checkbox>
                                                         <span>{item.texto}</span>
@@ -85,11 +86,11 @@ function Steper({data}:Props){
                                         </ul>
                                     </div>
                                 </section>
-                            </section>
+                            </StepSection>
                         </>
                     )
                 }) }
-            </aside>
+            </StepContainer>
         </>    
     ) 
 }

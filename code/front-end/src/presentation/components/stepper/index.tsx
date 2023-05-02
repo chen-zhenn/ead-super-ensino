@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 import { IExercise } from "@/domain/models/IExercise";
 import { message } from "antd";
 import { 
@@ -19,7 +19,9 @@ interface Props {
 
 function Steper({data}:Props){
     const [current, setCurrent] = useState(0);
-    const [selected,setSelected] = useState(0)
+    const [selected,setSelected] = useState(0);
+    const [answered,setAnswered] = useState(false)
+    const alternativeRef = useRef<HTMLUListElement>(null);
 
     const handlerAnternative = (id:number) => {
         console.log(`Alternativa selecionada ${id}`)
@@ -28,15 +30,21 @@ function Steper({data}:Props){
 
     const handlerAnswer =() => {
         console.log("Verificar Resposta")
+        setAnswered(true)
     }
 
     const next = () => {
         console.log("Avançar Exercício")
+        const $elems = alternativeRef.current?.querySelectorAll("li")
+        
+        setAnswered(false)
         setCurrent(current + 1);
     };
     
     const prev = () => {
         console.log("Voltar Exercício")
+
+        setAnswered(false)
         setCurrent(current - 1);
     };
 
@@ -51,7 +59,7 @@ function Steper({data}:Props){
                 { data.map((item, index) => {
                     return (
                           
-                        <StepContent key={item.tema} visible={ current === index  }>
+                        <StepContent key={index} visible={ current === index  }>
                             <StepHeadingGroup>
                                 <h2>{item.tema}</h2>
                                 <h3>{item.subtema}</h3>
@@ -74,12 +82,17 @@ function Steper({data}:Props){
                             
                             {/* Bloco Alternativas */}
                             <StepSection>
-                                <StepList>
-                                    {item.questao.alternativas.map((item, index) => {
+                                <StepList ref={alternativeRef} id="teste">
+                                    {item.questao.alternativas.map((value, index) => {
                                         return (
-                                            <StepListItem key={index} clickable={true} onClick={() => handlerAnternative(item.id)}>
-                                                <RadioBox filled={ item.id  === selected } size={14}>{item.letra}.</RadioBox>
-                                                <span>{item.texto}</span>
+                                            <StepListItem 
+                                                key={value.id}
+                                                clickable={true}
+                                                className={ (answered && value.id === item.questao.resposta) ? 
+                                                    "right" : (answered && value.id !== item.questao.resposta) ? "wrong " : "" }
+                                                onClick={() => handlerAnternative(value.id)}>
+                                                <RadioBox filled={ value.id  === selected } size={14}>{value.letra}.</RadioBox>
+                                                <span>{value.texto}</span>
                                             </StepListItem>
                                         )
                                     })}

@@ -74,9 +74,18 @@ export const StepList = styled.ul`
 
 export const StepListItem = styled.li`
     display: flex;
+    margin-bottom: 0.25rem;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
     cursor: ${(props:IStepper) => props.clickable && "pointer" };
+
+    &.right {
+        background-color: rgba(0, 255, 0, .33);
+    }
+
+    &.wrong {
+        background-color: rgba(255, 0, 0, .33);
+    }
 `
 
 export const StepControls = styled.div`
@@ -100,6 +109,8 @@ interface IStepper {
     clickable?: boolean;
     visible?: boolean;
     filled?: boolean;
+    right?: boolean;
+    wrong?: boolean;
     size?: number;
 }
 

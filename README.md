@@ -1,10 +1,10 @@
-# :rocket: EAD - Plataforma Digital
-
 <div align="center">
     <img src="resources/preview-v1.0.gif">
 </div>
 
-## Sobre
+# :rocket: EAD - Plataforma Digital
+
+### Sobre
 
 Aplicação Web: Plataforma digital de reforço escolar...
 

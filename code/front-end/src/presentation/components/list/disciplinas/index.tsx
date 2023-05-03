@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
 import { Card } from "antd";
 import { memo, useContext, useEffect, useState } from "react";

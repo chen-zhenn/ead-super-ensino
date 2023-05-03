@@ -10,7 +10,7 @@ interface INavItems {
   href: React.ReactNode | string
 };
 
-export default function () {
+export default function Exercises() {
   const router = useRouter();
   const { pathname } = router
   const { slug } = router.query;
@@ -27,11 +27,11 @@ export default function () {
         title: slug,
         href: slug
       }])
-  }, [slug]);
+  }, [pathname, slug]);
 
   useEffect(() => {
     seData(exercicios.filter((item) => item.disciplina === slug));
-  }, [exercicios]);
+  }, [exercicios, slug]);
 
 
   return (

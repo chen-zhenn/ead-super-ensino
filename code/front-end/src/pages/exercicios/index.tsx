@@ -18,7 +18,7 @@ function Exercises() {
           title: pathname,
           href: pathname
         }])
-  },[]);
+  },[pathname]);
 
   return (
     <>

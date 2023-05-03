@@ -1,8 +1,15 @@
-import { memo, useEffect, useState } from "react"
+import { memo, useState } from "react"
 import { IExercise } from "@/domain/models/IExercise";
-import { message } from "antd";
-import { 
-    StepContainer, 
+import {
+    StepWrapper,
+    StepHeader, 
+    StepContainer,
+    StepProgress,
+    StepProgressBar,
+    StepProgressList,
+    StepProgressItem,
+    StepProgressMarker,
+    StepProgressLabel,
     StepContent,
     StepSection,
     StepHeadingGroup,
@@ -45,21 +52,34 @@ function Steper({data}:Props){
         setCurrent(current - 1);
         setSelected(0);
     };
-
-    useEffect(() => {
-    },[data,current])
-
         
     return(
-        <>
-            <StepContainer>
+
+        <StepWrapper>
+
+            <StepHeader>
+                <StepProgress>
+                    <StepProgressBar perc={(current/data.length)}/>
+                    <StepProgressList>
+                        { data.map((item, index) => {
+                            return (
+                                <StepProgressItem key={index}>
+                                    <StepProgressMarker done={current >= index }>{index+1}</StepProgressMarker>
+                                    <StepProgressLabel done={current >= index }>{item.tema}</StepProgressLabel>
+                                </StepProgressItem>
+                            )
+                        }) }
+                    </StepProgressList>
+                </StepProgress>
+            </StepHeader>
+
+            <StepContainer steps={true}>
 
                 { data.map((item, index) => {
                     return (
                           
                         <StepContent key={index} visible={ current === index  }>
                             <StepHeadingGroup>
-                                <h2>{item.tema}</h2>
                                 <h3>{item.subtema}</h3>
                             </StepHeadingGroup>
 
@@ -106,15 +126,15 @@ function Steper({data}:Props){
                 }) }
 
                 <StepControls>
-                    <StepControlsItem onClick={() => handlerAnswer()}>Verificar Resposta</StepControlsItem>
+                    <StepControlsItem disabled={!selected && !choosed.get(current)} onClick={() => handlerAnswer()}>Verificar Resposta</StepControlsItem>
                     <StepControlsContainer>
-                        { current > 0 && <StepControlsItem onClick={() => prev()}>Anterior</StepControlsItem>}
-                        { current < (data.length -1) && <StepControlsItem onClick={() => next()}>Próximo</StepControlsItem>}
+                        { current > 0 && <StepControlsItem disabled={!selected && !choosed.get(current)} onClick={() => prev()}>Anterior</StepControlsItem>}
+                        { current < (data.length -1) && <StepControlsItem disabled={!selected && !choosed.get(current)} onClick={() => next()}>Próximo</StepControlsItem>}
                     </StepControlsContainer>
 
                 </StepControls>
             </StepContainer>
-        </>    
+        </StepWrapper>    
     ) 
 }
 

@@ -14,7 +14,7 @@ interface Props {
   exercises: IExerciseData;
 }
 
-function Home({exercises}:Props) {
+function Home({ exercises }: Props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -22,10 +22,14 @@ function Home({exercises}:Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main style={{
-        justifyContent:'flex-start', 
-        marginRight:'auto', paddingTop:'0.625rem'}}>
-        <DisciplinasList exercises={exercises}/>
+      <main
+        style={{
+          justifyContent: "flex-start",
+          marginRight: "auto",
+          paddingTop: "0.625rem",
+        }}
+      >
+        <DisciplinasList exercises={exercises} />
       </main>
 
       <footer className={styles.footer}></footer>
@@ -33,25 +37,34 @@ function Home({exercises}:Props) {
   );
 }
 
-export default memo(Home)
+export default memo(Home);
 
 export async function getStaticProps() {
-
-  const exercises:IExerciseData = {
+  const exercises: IExerciseData = {
     exercicios: [],
     _id: "",
-  }
-  
-  await exercise()
-    .getData()
-    .then((response) => {
-      const [bodyData] = response.body;
-      const { _id, exercicios } = bodyData
-      exercises._id = _id
-      exercises.exercicios = exercicios
-  });
+  };
+
+  const remoteData = await exercise();
+  try {
+    remoteData
+      .getData()
+      .then((response) => {
+        const [bodyData] = response.body;
+        const { _id, exercicios } = bodyData;
+        exercises._id = _id;
+        exercises.exercicios = exercicios;
+      })
+      .catch((error) => {
+        remoteData
+          .getMock()
+          .then((response) => {
+            exercises.exercicios = response.exercicios;
+          });
+      });
+  } catch (error) {}
 
   return {
-    props: { exercises }
-  }
+    props: { exercises },
+  };
 }

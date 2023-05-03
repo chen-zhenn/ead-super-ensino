@@ -18,18 +18,27 @@ const data: IData = {
 };
 
 export const ExeciseContext = createContext<IData>(data);
-ExeciseContext.displayName = 'ExeciseContext'
+ExeciseContext.displayName = "ExeciseContext";
 
 export const ExerciseProvider = ({ children }: Props) => {
   const [exerciseData, setExerciseData] = useState<IData>(data);
 
   useEffect(() => {
-    exercise()
-      .getData()
-      .then((response) => {
-        const [bodyData] = response.body;
-        setExerciseData(bodyData);
-      });
+    try {
+      exercise()
+        .getData()
+        .then((response) => {
+          const [bodyData] = response.body;
+          setExerciseData(bodyData);
+        })
+        .catch((error) => {
+          exercise()
+            .getMock()
+            .then((response) => {
+              setExerciseData({ _id: "", ...response });
+            });
+        });
+    } catch (error) {}
   }, []);
 
   return (

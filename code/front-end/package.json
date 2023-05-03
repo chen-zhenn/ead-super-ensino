@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
+    "@netlify/plugin-nextjs": "^4.36.0",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",

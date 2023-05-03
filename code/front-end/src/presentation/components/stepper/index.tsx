@@ -37,11 +37,13 @@ function Steper({data}:Props){
     const next = () => {
         setAnswered(false)
         setCurrent(current + 1);
+        setSelected(0);
     };
     
     const prev = () => {
         setAnswered(false)
         setCurrent(current - 1);
+        setSelected(0);
     };
 
     useEffect(() => {
@@ -88,9 +90,9 @@ function Steper({data}:Props){
                                                     "right" : (answered && value.id !== item.questao.resposta) ? "wrong " : "" }
                                                 onClick={() => handlerAnternative(value.id)}>
                                                 <RadioBox 
-                                                    className={`choosed-${choosed.get(current) && value.id  === choosed.get(current) && value.id}`}
-                                                    choosedId={ choosed.get(current) && value.id  === choosed.get(current) && value.id}
-                                                    // filled={  value.id  === selected } 
+                                                    className={choosed.get(current) && value.id  === choosed.get(current) && `choosed-${value.id}`}
+                                                    choosedId={choosed.get(current) && value.id  === choosed.get(current) && value.id}
+                                                    filled={  value.id  === selected } 
                                                     size={14}>{value.letra}.</RadioBox>
                                                 <span>{value.texto}</span>
                                             </StepListItem>

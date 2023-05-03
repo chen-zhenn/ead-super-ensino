@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="resources/preview-v1.0.gif">
+    <img src="resources/preview-v2.0.gif">
 </div>
 
 # :rocket: EAD - Plataforma Digital

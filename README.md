@@ -8,8 +8,11 @@
 
 Aplicação Web: Plataforma digital de reforço escolar...
 
-:globe_with_meridians: __Acessar demo__: :point_right: [Aqui](https://feature-staging--fe-super-ensino.netlify.app/)
+:globe_with_meridians: __Veja pagina demo__:
 
+:link: __Links__:
+* :arrow_right: Vercel [acesse aqui](https://ead-super-ensino.vercel.app/)
+* :arrow_right: Netlify [acesse aqui](https://fe-super-ensino.netlify.app/)
 ## :electric_plug: Instalação
 
 <div align="center">

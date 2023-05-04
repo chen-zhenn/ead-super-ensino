@@ -12,7 +12,7 @@ interface IExerciseData {
 
 interface Props {
   exercises: IExerciseData;
-}
+};
 
 function Home({ exercises }: Props) {
   return (
@@ -37,8 +37,6 @@ function Home({ exercises }: Props) {
   );
 }
 
-export default memo(Home);
-
 export async function getStaticProps() {
   const exercises: IExerciseData = {
     exercicios: [],
@@ -49,22 +47,22 @@ export async function getStaticProps() {
   try {
     remoteData
       .getData()
-      .then((response) => {
-        const [bodyData] = response.body;
-        const { _id, exercicios } = bodyData;
-        exercises._id = _id;
-        exercises.exercicios = exercicios;
-      })
-      .catch((error) => {
-        remoteData
-          .getMock()
-          .then((response) => {
+        .then((response) => {
+          const [bodyData] = response.body;
+          const { _id, exercicios } = bodyData;
+          exercises._id = _id;
+          exercises.exercicios = exercicios;
+        })
+        .catch((error) => {
+          remoteData.getMock().then((response) => {
             exercises.exercicios = response.exercicios;
           });
-      });
+        });
   } catch (error) {}
 
   return {
     props: { exercises },
   };
 }
+
+export default memo(Home);

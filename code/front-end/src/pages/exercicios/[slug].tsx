@@ -6,14 +6,9 @@ import { ExeciseContext } from "@/presentation/contexts/exercicios";
 import { IExercise } from "@/domain/models/IExercise";
 import NavBreadcrumb from "@/presentation/components/breadcrumb";
 import Stepper from "@/presentation/components/stepper";
-import exercicios from ".";
 interface IExerciseData {
   _id: string;
   exercicios: IExercise[];
-}
-interface INavItems {
-  title: React.ReactNode | string;
-  href: React.ReactNode | string;
 }
 
 const exercises: IExerciseData = {
@@ -22,28 +17,16 @@ const exercises: IExerciseData = {
 };
 interface Props {
   exercises: IExerciseData;
+  params: any;
 }
 
-function Exercises({ exercises }: Props) {
+function Exercises({ exercises, params }: Props) {
   const router = useRouter();
-  const { pathname } = router;
-  const { slug } = router.query;
+  const { asPath } = router; 
+  const { slug } = params;
   const { exercicios } = useContext(ExeciseContext) || exercises;
   const [data, seData] = useState<IExercise[]>([]);
-  const [nav, setNav] = useState<INavItems[]>([]);
-
-  useEffect(() => {
-    setNav([
-      {
-        title: pathname,
-        href: pathname,
-      },
-      {
-        title: slug,
-        href: slug,
-      },
-    ]);
-  }, [pathname, slug]);
+  const [path] = useState<string>(decodeURIComponent(asPath))
 
   useEffect(() => {
     seData(exercicios.filter((item) => item.disciplina === slug));
@@ -52,7 +35,7 @@ function Exercises({ exercises }: Props) {
   return (
     <>
       <h2>Exercício - {slug}</h2>
-      <NavBreadcrumb items={nav} />
+      <NavBreadcrumb path={path} />
       <Stepper data={data} />
     </>
   );
@@ -60,8 +43,10 @@ function Exercises({ exercises }: Props) {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
 
+  const { params } = context
+
   return {
-    props: { exercises },
+    props: { exercises, params },
   };
 }
 
@@ -75,8 +60,8 @@ export async function getStaticPaths(context: GetStaticPathsContext) {
 
   const slugs: Set<string> = new Set();
   const paths: IParams[] = [];
-  const data = await getRemoteExerciseData();
 
+  await getRemoteExerciseData();
   setStaticDataPath(exercises.exercicios);
 
   function setStaticDataPath(exercises: IExercise[]): void {

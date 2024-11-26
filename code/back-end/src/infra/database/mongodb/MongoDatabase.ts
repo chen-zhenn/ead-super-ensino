@@ -11,7 +11,6 @@ export class MongoDatabase implements IDatabase {
   private client: MongoClient | null = null;
   private db: Db | null = null;
   private connString = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-  // private connString = `mongodb://mongo:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}?authSource=admin`;
   private static instance: MongoDatabase;
 
   public static getInstance(): MongoDatabase {
